@@ -2,8 +2,6 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 
-group = 'com.github.Murashov'
-
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.2"
