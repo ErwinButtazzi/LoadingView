@@ -14,7 +14,7 @@
         <attr name="ring_width" format="dimension" />
         <attr name="ring_radius" format="dimension" />
 
-
+        <attr name="animation_duration" format="integer"/>
     </declare-styleable>
 
 </resources>

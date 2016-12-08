@@ -70,6 +70,7 @@ public class LoadingView extends View {
 
     private float mRotation = 0f;
 
+    private int mDuration = 0;
 
     public LoadingView(Context context) {
         this(context, null);
@@ -96,6 +97,7 @@ public class LoadingView extends View {
             setProgressStyle(a.getInt(R.styleable.LoadingView_progress_style, PROGRESS_STYLE_MATERIAL));
             setStrokeWidth(a.getDimension(R.styleable.LoadingView_ring_width, dp2px(STROKE_WIDTH)));
             setCenterRadius(a.getDimension(R.styleable.LoadingView_ring_radius, dp2px(CENTER_RADIUS)));
+            mDuration = a.getInt(R.styleable.LoadingView_animation_duration, ANIMATOR_DURATION);
             a.recycle();
         }
     }
@@ -142,7 +144,6 @@ public class LoadingView extends View {
         }
     }
 
-
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -170,7 +171,7 @@ public class LoadingView extends View {
     }
 
     private void buildAnimator() {
-        final ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, 1f).setDuration(ANIMATOR_DURATION);
+        final ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, 1f).setDuration(mDuration);
         valueAnimator.setRepeatCount(-1);
         valueAnimator.setInterpolator(new LinearInterpolator());
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -267,7 +268,7 @@ public class LoadingView extends View {
     private AnimatorSet buildFlexibleAnimation() {
         final Ring ring = mRing;
         AnimatorSet set = new AnimatorSet();
-        ValueAnimator increment = ValueAnimator.ofFloat(0, MAX_PROGRESS_ARC - MIN_PROGRESS_ARC).setDuration(ANIMATOR_DURATION / 2);
+        ValueAnimator increment = ValueAnimator.ofFloat(0, MAX_PROGRESS_ARC - MIN_PROGRESS_ARC).setDuration(mDuration / 2);
         increment.setInterpolator(new LinearInterpolator());
         increment.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -279,7 +280,7 @@ public class LoadingView extends View {
             }
         });
         increment.addListener(animatorListener);
-        ValueAnimator reduce = ValueAnimator.ofFloat(0, MAX_PROGRESS_ARC - MIN_PROGRESS_ARC).setDuration(ANIMATOR_DURATION / 2);
+        ValueAnimator reduce = ValueAnimator.ofFloat(0, MAX_PROGRESS_ARC - MIN_PROGRESS_ARC).setDuration(mDuration / 2);
         reduce.setInterpolator(interpolator);
         reduce.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
