@@ -35,7 +35,7 @@ public class LoadingView extends View {
     private static final float MAX_PROGRESS_ARC = 300f;
     private static final float MIN_PROGRESS_ARC = 20f;
 
-    private static final long ANIMATOR_DURATION = 1332;
+    private static final int ANIMATOR_DURATION = 1332;
 
 
     private Rect bounds;
