@@ -19,9 +19,6 @@ import android.view.animation.LinearInterpolator;
 
 import com.pitt.loadingview.library.animation.FastOutSlowInInterpolator;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-
 
 public class LoadingView extends View {
 
@@ -338,7 +335,6 @@ public class LoadingView extends View {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics());
     }
 
-
     @Override
     protected Parcelable onSaveInstanceState() {
         Parcelable parcelable = super.onSaveInstanceState();
@@ -349,8 +345,13 @@ public class LoadingView extends View {
 
     @Override
     protected void onRestoreInstanceState(Parcelable state) {
+        if (!(state instanceof SavedState)) {
+            super.onRestoreInstanceState(state);
+            return;
+        }
+
         SavedState savedState = (SavedState) state;
-        super.onRestoreInstanceState(state);
+        super.onRestoreInstanceState(savedState.getSuperState());
         mRing = savedState.ring;
     }
 
